@@ -1,3 +1,9 @@
 projekat\Rezervacija.class
 projekat\Aranzman.class
 projekat\Klijent.class
+projekat\KlijentServiceImpl.class
+projekat\RezervacijaService.class
+projekat\AranzmanServiceImpl.class
+projekat\KlijentService.class
+projekat\RezervacijaServiceImpl.class
+projekat\AranzmanService.class

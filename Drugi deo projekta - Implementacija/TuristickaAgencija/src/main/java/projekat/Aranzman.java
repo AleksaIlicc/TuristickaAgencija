@@ -32,17 +32,12 @@ public class Aranzman {
 
 	@Column(name = "info")
 	private String info;
-	@Column(name = "slika")
-	private String slika;
-
-	@Column(name = "brojDanaAktivnosti")
-	private int brojDanaAktivnosti; // koliko je dana aranzman aktivan
 
 	public Aranzman() {
 	}
 
 	public Aranzman(int id, String naziv, double cena, int brojMesta, String polaznaDestinacija, Date vremePolaska,
-			String dolaznaDestinacija, Date vremeDolaska, String info, String slika, int brojDanaAktivnosti) {
+			String dolaznaDestinacija, Date vremeDolaska, String info) {
 		this.id = id;
 		this.naziv = naziv;
 		this.cena = cena;
@@ -52,8 +47,6 @@ public class Aranzman {
 		this.dolaznaDestinacija = dolaznaDestinacija;
 		this.vremeDolaska = vremeDolaska;
 		this.info = info;
-		this.slika = slika;
-		this.brojDanaAktivnosti = brojDanaAktivnosti;
 	}
 
 	public int getId() {
@@ -128,19 +121,4 @@ public class Aranzman {
 		this.info = info;
 	}
 
-	public String getSlika() {
-		return slika;
-	}
-
-	public void setSlika(String slika) {
-		this.slika = slika;
-	}
-
-	public int getBrojDanaAktivnosti() {
-		return brojDanaAktivnosti;
-	}
-
-	public void setBrojDanaAktivnosti(int brojDanaAktivnosti) {
-		this.brojDanaAktivnosti = brojDanaAktivnosti;
-	}
 }

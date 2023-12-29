@@ -16,7 +16,6 @@
     
     <build>
     	<plugins>
-   			 <!-- JBoss AS plugin to deploy the application -->
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
@@ -64,6 +63,20 @@
         	<artifactId>jboss-ejb-api_3.2_spec</artifactId>
         	<version>1.0.0.Final</version>
     	</dependency>
+    	
+    	<!-- https://mvnrepository.com/artifact/jakarta.ejb/jakarta.ejb-api -->
+		<dependency>
+		    <groupId>jakarta.ejb</groupId>
+		    <artifactId>jakarta.ejb-api</artifactId>
+		    <version>4.0.1</version>
+		</dependency>
+
+		<dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>javax.ejb-api</artifactId>
+            <version>3.2</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -76,6 +89,19 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>5.5.6.Final</version>
         </dependency>
+
+		<dependency> 
+  			<groupId>javax.enterprise</groupId> 
+  			<artifactId>cdi-api</artifactId> 
+   			<version>1.0-SP1</version>  
+		</dependency>
+		
+		<dependency>
+		    <groupId>javax</groupId>
+		    <artifactId>javaee-api</artifactId>
+		    <version>7.0</version> 
+		    <scope>provided</scope>
+		</dependency>
 
         <dependency>
             <groupId>mysql</groupId>

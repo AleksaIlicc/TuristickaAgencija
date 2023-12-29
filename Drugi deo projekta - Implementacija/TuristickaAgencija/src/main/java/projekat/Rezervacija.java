@@ -23,18 +23,15 @@ public class Rezervacija {
 
 	@Column(name = "vremeRezervacije")
 	private Date vremeRezervacije;
-	@Column(name = "status")
-	private String status;
 
 	public Rezervacija() {
 	}
 
-	public Rezervacija(int id, int klijent_id, int aranzman_id, Date vremeRezervacije, String status) {
+	public Rezervacija(int id, int klijent_id, int aranzman_id, Date vremeRezervacije) {
 		this.id = id;
 		this.klijent_id = klijent_id;
 		this.aranzman_id = aranzman_id;
 		this.vremeRezervacije = vremeRezervacije;
-		this.status = status;
 	}
 
 	public int getId() {
@@ -51,14 +48,6 @@ public class Rezervacija {
 
 	public void setVremeRezervacije(Date vremeRezervacije) {
 		this.vremeRezervacije = vremeRezervacije;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 }
