@@ -49,5 +49,21 @@ public class Rezervacija {
 	public void setVremeRezervacije(Date vremeRezervacije) {
 		this.vremeRezervacije = vremeRezervacije;
 	}
+	
+	public int getKlijent_id() {
+		return klijent_id;
+	}
+
+	public void setKlijent_id(int klijent_id) {
+		this.klijent_id = klijent_id;
+	}
+
+	public int getAranzman_id() {
+		return aranzman_id;
+	}
+
+	public void setAranzman_id(int aranzman_id) {
+		this.aranzman_id = aranzman_id;
+	}
 
 }

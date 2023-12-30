@@ -18,6 +18,8 @@ public class Aranzman {
 	private String naziv;
 	@Column(name = "cena")
 	private double cena;
+	@Column(name = "brojSlobodnihMesta")
+	private int brojSlobodnihMesta;
 	@Column(name = "brojMesta")
 	private int brojMesta;
 
@@ -41,6 +43,7 @@ public class Aranzman {
 		this.id = id;
 		this.naziv = naziv;
 		this.cena = cena;
+		this.brojSlobodnihMesta = brojMesta;
 		this.brojMesta = brojMesta;
 		this.polaznaDestinacija = polaznaDestinacija;
 		this.vremePolaska = vremePolaska;
@@ -119,6 +122,14 @@ public class Aranzman {
 
 	public void setInfo(String info) {
 		this.info = info;
+	}
+	
+	public int getBrojSlobodnihMesta() {
+		return brojSlobodnihMesta;
+	}
+
+	public void setBrojSlobodnihMesta(int brojSlobodnihMesta) {
+		this.brojSlobodnihMesta = brojSlobodnihMesta;
 	}
 
 }

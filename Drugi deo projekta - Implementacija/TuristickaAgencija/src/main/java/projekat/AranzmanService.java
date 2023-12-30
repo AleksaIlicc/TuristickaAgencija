@@ -7,5 +7,8 @@ public interface AranzmanService {
 			String dolaznaDestinacija, Date vremeDolaska, String info);
 	public void obrisiAranzman(int id);
 	public String prikaziAranzman(int id);
-	public String prikaziSpisakRezervacijaAranzmana(int id);
+	public String prikaziSpisakRezervisanogAranzmana(int id);
+	public String prikaziAranzmaneNarednihNdana(int brojDana);
+	public void azurirajOpisAranzmana(int id, String opis);
+	public String prikaziNajpoznatijiAranzman();
 }

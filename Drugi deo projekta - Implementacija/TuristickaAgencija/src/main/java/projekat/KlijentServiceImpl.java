@@ -72,7 +72,7 @@ public class KlijentServiceImpl implements KlijentService {
 
 		String rezultat = "";
 
-		TypedQuery<Klijent> query = em.createQuery("select k from klijenti k", Klijent.class);
+		TypedQuery<Klijent> query = em.createQuery("select * from klijenti k", Klijent.class);
 		List<Klijent> sviKlijenti = query.getResultList();
 
 		for (Klijent k : sviKlijenti) {
@@ -86,7 +86,7 @@ public class KlijentServiceImpl implements KlijentService {
 	@Override
 	public String prikaziKlijenta(String emailAdresa) {
 		String rezultat = "";
-		Klijent k = (Klijent) em.createQuery("SELECT k FROM klijenti WHERE emailAdresa= " + emailAdresa, Klijent.class);
+		Klijent k = (Klijent) em.createQuery("SELECT * FROM klijenti WHERE emailAdresa= " + emailAdresa, Klijent.class);
 		if (k == null) {
 			System.out.println("Ne postoji klijent sa email adresom: " + emailAdresa);
 			return null;
