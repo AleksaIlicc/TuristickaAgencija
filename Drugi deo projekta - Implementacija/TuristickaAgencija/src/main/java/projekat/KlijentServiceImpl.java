@@ -7,6 +7,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
@@ -17,10 +18,6 @@ public class KlijentServiceImpl implements KlijentService {
 	private EntityManager em;
 
 	public KlijentServiceImpl() {
-
-	}
-
-	public KlijentServiceImpl(EntityManager em) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgencijaPU");
 		em = emf.createEntityManager();
 	}
@@ -28,10 +25,13 @@ public class KlijentServiceImpl implements KlijentService {
 	@Override
 	public void dodajKlijenta(int id, String ime, String prezime, Date datumRodjenja, String brojTelefona,
 			String emailAdresa) {
-		em.getTransaction().begin();
-		Klijent k = new Klijent(id, ime, prezime, datumRodjenja, brojTelefona, emailAdresa);
-		em.persist(k);
-		em.getTransaction().commit();
+		Klijent kTest = vratiKlijenta(emailAdresa);
+		if (kTest == null) {
+			em.getTransaction().begin();
+			Klijent k = new Klijent(id, ime, prezime, datumRodjenja, brojTelefona, emailAdresa);
+			em.persist(k);
+			em.getTransaction().commit();
+		}
 	}
 
 	@Override
@@ -72,11 +72,11 @@ public class KlijentServiceImpl implements KlijentService {
 
 		String rezultat = "";
 
-		TypedQuery<Klijent> query = em.createQuery("select * from klijenti k", Klijent.class);
+		TypedQuery<Klijent> query = em.createQuery("select k from Klijent k", Klijent.class);
 		List<Klijent> sviKlijenti = query.getResultList();
 
 		for (Klijent k : sviKlijenti) {
-			rezultat = rezultat + "ID: " + k.getId() + "," + "Ime: " + k.getIme() + ", Prezime: " + k.getPrezime()
+			rezultat = rezultat + "ID: " + k.getId() + ", Ime: " + k.getIme() + ", Prezime: " + k.getPrezime()
 					+ ", Datum rodjenja: " + k.getDatumRodjenja() + ", Broj telefona: " + k.getBrojTelefona()
 					+ ", Email adresa: " + k.getEmailAdresa() + "\n";
 		}
@@ -86,13 +86,29 @@ public class KlijentServiceImpl implements KlijentService {
 	@Override
 	public String prikaziKlijenta(String emailAdresa) {
 		String rezultat = "";
-		Klijent k = (Klijent) em.createQuery("SELECT * FROM klijenti WHERE emailAdresa= " + emailAdresa, Klijent.class);
+		Klijent k = vratiKlijenta(emailAdresa);
 		if (k == null) {
 			System.out.println("Ne postoji klijent sa email adresom: " + emailAdresa);
 			return null;
 		}
-		return rezultat + "ID:" + k.getId() + "," + "Ime: " + k.getIme() + ", Prezime: " + k.getPrezime()
+		return rezultat + "ID: " + k.getId() + ", Ime: " + k.getIme() + ", Prezime: " + k.getPrezime()
 				+ ", Datum rodjenja: " + k.getDatumRodjenja() + ", Broj telefona: " + k.getBrojTelefona()
 				+ ", Email adresa: " + k.getEmailAdresa() + "\n";
+	}
+
+	@Override
+	public Klijent vratiKlijenta(int id) {
+		return em.find(Klijent.class, id);
+	}
+
+	public Klijent vratiKlijenta(String emailAdresa) {
+		try {
+			String hql = "select k from Klijent k WHERE emailAdresa = :email";
+			TypedQuery<Klijent> query = em.createQuery(hql, Klijent.class);
+			query.setParameter("email", emailAdresa);
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 }

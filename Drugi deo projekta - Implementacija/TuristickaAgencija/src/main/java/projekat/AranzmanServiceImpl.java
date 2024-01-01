@@ -18,9 +18,6 @@ public class AranzmanServiceImpl implements AranzmanService {
 	private EntityManager em;
 
 	public AranzmanServiceImpl() {
-	}
-
-	public AranzmanServiceImpl(EntityManager em) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgencijaPU");
 		em = emf.createEntityManager();
 	}
@@ -62,8 +59,8 @@ public class AranzmanServiceImpl implements AranzmanService {
 	public String prikaziSpisakRezervisanogAranzmana(int id) {
 
 		String rezultat = "";
-		String jpqlQuery = "SELECT a.ime, a.prezime, a.brojTelefona, a.emailAdresa " + "FROM Aranzman a "
-				+ "JOIN Rezervacija r ON a.id = r.aranzman.id " + "JOIN Klijent k ON k.id = r.klijent.id"
+		String jpqlQuery = "select k.ime, k.prezime, k.brojTelefona, k.emailAdresa " + "FROM Aranzman a "
+				+ "JOIN Rezervacija r ON a.id = r.aranzman_id " + "JOIN Klijent k ON k.id = r.klijent_id "
 				+ "WHERE a.id = " + id;
 
 		Query query = em.createQuery(jpqlQuery);
@@ -87,11 +84,11 @@ public class AranzmanServiceImpl implements AranzmanService {
 		String rezultat = "";
 
 		TypedQuery<Aranzman> query = em.createQuery(
-				"SELECT * FROM aranzmani" + "WHERE datediff(vremeDolaska, now()) <= " + brojDana, Aranzman.class);
+				"SELECT a FROM Aranzman a " + "WHERE datediff(vremePolaska, now()) <= " + brojDana+ " AND now()<vremePolaska", Aranzman.class);
 		List<Aranzman> sviAranzmani = query.getResultList();
 
 		for (Aranzman a : sviAranzmani) {
-			rezultat = rezultat + "ID: " + a.getId() + "," + "Naziv: " + a.getNaziv() + ", Cena: " + a.getCena()
+			rezultat = rezultat + "ID: " + a.getId() + ", Naziv: " + a.getNaziv() + ", Cena: " + a.getCena()
 					+ ", Mesta(slobodna/ukupno): " + a.getBrojSlobodnihMesta() + "/" + a.getBrojMesta()
 					+ ", Polazna destinacija: " + a.getPolaznaDestinacija() + ", Vreme polaska: " + a.getVremePolaska()
 					+ ", Dolazna destinacija: " + a.getDolaznaDestinacija() + ", Vreme dolaska: " + a.getVremeDolaska()
@@ -116,7 +113,8 @@ public class AranzmanServiceImpl implements AranzmanService {
 		String rezultat = "";
 
 		TypedQuery<Aranzman> query = em.createQuery(
-				"SELECT * FROM aranzmani" + "ORDER BY brojMesta-brojSlobodnihMesta DESC LIMIT 1", Aranzman.class);
+				"SELECT a FROM Aranzman a " + "ORDER BY brojMesta-brojSlobodnihMesta DESC", Aranzman.class);
+	
 		query.setMaxResults(1);
 		Aranzman a = query.getSingleResult();
 
@@ -127,6 +125,11 @@ public class AranzmanServiceImpl implements AranzmanService {
 				+ ", Opis: " + a.getInfo() + "\n";
 
 		return rezultat;
+	}
+
+	@Override
+	public Aranzman vratiAranzman(int id) {
+		return em.find(Aranzman.class, id);
 	}
 
 }

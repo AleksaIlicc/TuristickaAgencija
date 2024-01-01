@@ -11,4 +11,5 @@ public interface AranzmanService {
 	public String prikaziAranzmaneNarednihNdana(int brojDana);
 	public void azurirajOpisAranzmana(int id, String opis);
 	public String prikaziNajpoznatijiAranzman();
+	public Aranzman vratiAranzman(int id);
 }

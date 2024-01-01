@@ -15,10 +15,6 @@ public class RezervacijaServiceImpl implements RezervacijaService {
 	private EntityManager em;
 
 	public RezervacijaServiceImpl() {
-
-	}
-
-	public RezervacijaServiceImpl(EntityManager em) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgencijaPU");
 		em = emf.createEntityManager();
 	}
@@ -31,7 +27,7 @@ public class RezervacijaServiceImpl implements RezervacijaService {
 		if (trBrMesta <= 0) {
 			return;
 		}
-		a.setBrojMesta(trBrMesta - 1);
+		a.setBrojSlobodnihMesta(trBrMesta - 1);
 		em.getTransaction().commit();
 
 		em.getTransaction().begin();
@@ -56,6 +52,11 @@ public class RezervacijaServiceImpl implements RezervacijaService {
 		em.getTransaction().begin();
 		em.remove(r);
 		em.getTransaction().commit();
+	}
+
+	@Override
+	public Rezervacija vratiRezervaciju(int id) {
+		return em.find(Rezervacija.class, id);
 	}
 
 }

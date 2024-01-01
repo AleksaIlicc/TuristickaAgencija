@@ -9,4 +9,6 @@ public interface KlijentService {
 	public void azurirajEmailAdresu(int id, String emailAdresa);
 	public void azurirajBrojTelefona(int id, String brojTelefona);
 	public String prikaziSveKlijente();
+	public Klijent vratiKlijenta(int id);
+	public Klijent vratiKlijenta(String emailAdresa);
 }
