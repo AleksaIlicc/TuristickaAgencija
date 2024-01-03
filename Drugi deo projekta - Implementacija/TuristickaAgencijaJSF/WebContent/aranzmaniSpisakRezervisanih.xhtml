@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Aranžmani | Prikazivanje spiska</title>
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+</h:head>
+<h:body>
+	<div class="card">
+		<div class="form-section" id="form-section">
+			<h:form>
+				<h3>Prikazivanje Spiska Svih Osoba Koje Su Rezervisale Aranžman</h3>
+
+				<div>
+					<h:outputLabel value="ID:" />
+					<h:inputText value="#{aranzmanController.spisakId}" />
+				</div>
+
+				<h:commandButton value="Prikaži Spisak" styleClass="button"
+					action="#{aranzmanController.postaviSpisakBool}">
+				</h:commandButton>
+			</h:form>
+			
+		</div>
+		<div class="message">
+			<h:panelGroup rendered="#{aranzmanController.prikaziSpisakBool}">
+	            <h:outputText value="#{aranzmanController.prikaziSpisakAranzmana(aranzmanController.spisakId)}" escape="false"/>
+	        </h:panelGroup>
+		</div>
+		<div class="back-link">
+			<a href="aranzmani.xhtml">Vrati se na stranicu aranžmana</a>
+		</div>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Klijenti | Dodavanje</title>
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+</h:head>
+<h:body>
+	<div class="card">
+		<div class="form-section" id="form-section">
+			<h:form>
+				<h3>Dodavanje Klijenta</h3>
+
+				<div>
+					<h:outputLabel value="ID:" />
+					<h:inputText value="#{klijentController.kl.id}" />
+				</div>
+
+				<div>
+					<h:outputLabel value="Ime:" />
+					<h:inputText value="#{klijentController.kl.ime}" />
+				</div>
+
+				<div>
+					<h:outputLabel value="Prezime:" />
+					<h:inputText value="#{klijentController.kl.prezime}" />
+				</div>
+
+				<div>
+					<h:outputLabel value="Datum Rođenja:" />
+					<h:inputText value="#{klijentController.kl.datumRodjenja}">
+						<f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" />
+					</h:inputText>
+				</div>
+				
+				<div>
+					<h:outputLabel value="Broj telefona:" />
+					<h:inputText value="#{klijentController.kl.brojTelefona}" />
+				</div>
+				
+				<div>
+					<h:outputLabel value="Email adresa:" />
+					<h:inputText value="#{klijentController.kl.emailAdresa}" />
+				</div>
+
+				<h:commandButton value="Dodaj Klijenta" styleClass="button"
+					action="#{klijentController.dodajKlijenta(klijentController.kl)}">
+				</h:commandButton>
+			</h:form>
+		</div>
+		<div class="back-link">
+			<a href="klijenti.xhtml">Vrati se na stranicu klijenata</a>
+		</div>
+	</div>
+</h:body>
+</html>
